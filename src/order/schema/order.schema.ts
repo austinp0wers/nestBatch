@@ -17,6 +17,9 @@ export class Order {
 
   @Prop(IAdditionalPrice)
   additionalPrice: IAdditionalPrice;
+
+  @Prop()
+  completedAt: Date;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

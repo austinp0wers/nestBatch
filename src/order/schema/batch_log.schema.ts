@@ -11,6 +11,9 @@ export class Batch_Log {
   @Prop()
   status: string;
 
+  @Prop()
+  result: number;
+
   @Prop({
     default: Date.now,
   })
