@@ -22,6 +22,11 @@ const mongoDbService = new MongoDbService();
       useFactory: () => mongoDbService.getMongoOptions()['automatic_kpi'],
       connectionName: 'automatic_kpi',
     }),
+    MongooseModule.forRootAsync({
+      useFactory: () =>
+        mongoDbService.getMongoOptions()['job_execution_detail'],
+      connectionName: 'job_execution_detail',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

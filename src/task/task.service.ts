@@ -11,18 +11,14 @@ export class TaskService {
 
   // !! Interval time should not be set to env
   // app bound시 env가 null로 읽힌 상태에서 실행되는 것을 방지
-  @Interval(3000)
+  @Interval(10000)
   async totalRevenue() {
-    console.log('total revenue ');
     let total_revenue;
     try {
       total_revenue = await this.batchSteps.getTotalOrderRevenue();
     } catch (err) {
       console.log(err);
     }
-    let a = 1;
-    this.logger.log(`Task is called ${a}`);
-    a += 1;
     this.logger.log(`total revenue is ${total_revenue}`);
   }
 }

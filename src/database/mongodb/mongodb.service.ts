@@ -15,6 +15,11 @@ export class MongoDbService {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
+      job_execution_detail: {
+        uri: `${process.env.MONGO_DATABASE_JOB_EXECUTION_DETAIL}`,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
     };
     return mongoOptions;
   }

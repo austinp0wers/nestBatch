@@ -8,13 +8,18 @@ export class ItemReader {
     @InjectModel(Order.name, 'orders') private orderModel: Model<OrderDocument>,
   ) {}
 
-  public async getOrders(today: Date) {
-    return await this.orderModel.find(
+  public async getOrders(fromDate: Date) {
+    const ordersList = await this.orderModel.find(
+      { status: 'complete', completedAt: { $gt: fromDate } },
       {
-        status: 'complete',
-        completedAt: { $gt: today },
+        _id: 1,
+        riderId: 1,
+        notifiedPrice: 1,
+        additionalPrice: 1,
+        completedAt: 1,
       },
-      { _id: 1, riderId: 1, notifiedPrice: 1, additionalPrice: 1 },
     );
+
+    return ordersList;
   }
 }
