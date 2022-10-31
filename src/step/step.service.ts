@@ -19,6 +19,6 @@ export class BatchStepService {
     );
     const batchDto: BatchLogSaveDto = new BatchLogSaveDto();
     const saveTotalRevenue = await this.itemWriter.saveBatchExecution(batchDto);
-    return ordersResult;
+    return saveTotalRevenue;
   }
 }
