@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type JobExecutionDetailDocument = Job_Execution_Detail & Document;
+export type JobExecutionDetailDocument = Job_Execution & Document;
 
 @Schema()
-export class Job_Execution_Detail {
+export class Job_Execution {
   @Prop()
   batchCategory: string;
 
@@ -21,4 +21,4 @@ export class Job_Execution_Detail {
 }
 
 export const JobExecutionDetailSchema =
-  SchemaFactory.createForClass(Job_Execution_Detail);
+  SchemaFactory.createForClass(Job_Execution);
