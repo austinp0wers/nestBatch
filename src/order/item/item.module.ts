@@ -1,7 +1,10 @@
 import { ItemWriter } from './item.writer';
-import { Batch_Log, BatchLogSchema } from './../schema/batch_log.schema';
+import {
+  Batch_Log,
+  BatchLogSchema,
+} from '../../database/schema/batch_log.schema';
 import { ItemProcessor } from './item.processor';
-import { Order, OrderSchema } from './../schema/order.schema';
+import { Order, OrderSchema } from '../../database/schema/order.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ItemReader } from './item.reader';
 import { Module } from '@nestjs/common';

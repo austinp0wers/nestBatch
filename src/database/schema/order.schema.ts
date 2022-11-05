@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { IAdditionalPrice } from '../interface/additionalPrice.interface';
+import { IAdditionalPrice } from '../../order/interface/additionalPrice.interface';
 
 export type OrderDocument = Order & Document;
 

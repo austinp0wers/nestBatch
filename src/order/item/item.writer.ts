@@ -1,4 +1,7 @@
-import { BatchLogDocument, Batch_Log } from './../schema/batch_log.schema';
+import {
+  BatchLogDocument,
+  Batch_Log,
+} from '../../database/schema/batch_log.schema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
