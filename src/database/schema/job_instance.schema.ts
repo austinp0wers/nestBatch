@@ -12,18 +12,17 @@ export class Job_Instance {
   status: string;
 
   @Prop()
-  failedTask: string;
-
-  @Prop()
-  range: number;
-
-  @Prop()
   totalRange: number;
 
   @Prop({
     default: Date.now,
   })
   createdAt: Date;
+
+  @Prop({
+    default: null,
+  })
+  completedAt: Date;
 }
 
 export const JobInstanceSchema = SchemaFactory.createForClass(Job_Instance);
