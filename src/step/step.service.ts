@@ -12,13 +12,18 @@ export class BatchStepService {
   ) {}
 
   public async getTotalOrderRevenue() {
-    const prevDate = new Date('2022-10-19T15:00:00.000Z');
+    const prevDate = new Date();
+    const batchDto: BatchLogSaveDto = new BatchLogSaveDto('revenueBatch');
+    await this.itemWriter.saveBatchExecution(batchDto);
+
+    let totalRevenue: string;
     const ordersResult = await this.itemReader.getOrders(prevDate);
-    const totalRevenue: number = await this.itemProcessor.calculateTotalRevenue(
-      ordersResult,
-    );
-    const batchDto: BatchLogSaveDto = new BatchLogSaveDto();
-    const saveTotalRevenue = await this.itemWriter.saveBatchExecution(batchDto);
-    return saveTotalRevenue;
+    try {
+      totalRevenue = await this.itemProcessor.calculateTotalRevenue(
+        ordersResult,
+      );
+    } catch (err) {}
+
+    return totalRevenue;
   }
 }

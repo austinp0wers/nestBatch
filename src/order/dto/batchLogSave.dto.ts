@@ -1,13 +1,10 @@
-import { IsNotEmpty, IsNumberString, Max, MaxLength } from 'class-validator';
-
+import { IsNotEmpty, IsNumberString, MaxLength } from 'class-validator';
 export class BatchLogSaveDto {
+  constructor(jobType) {
+    this.jobType = jobType;
+  }
   @IsNumberString()
   @IsNotEmpty()
   @MaxLength(128)
-  batchType: string;
-
-  @IsNumberString()
-  @IsNotEmpty()
-  @MaxLength(128)
-  status: string;
+  jobType: string;
 }

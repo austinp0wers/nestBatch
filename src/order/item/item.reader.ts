@@ -10,7 +10,7 @@ export class ItemReader {
 
   public async getOrders(fromDate: Date) {
     const ordersList = await this.orderModel.find(
-      { status: 'complete', completedAt: { $gt: fromDate } },
+      { status: 'complete', completedAt: { $lte: fromDate } },
       {
         _id: 1,
         riderId: 1,
