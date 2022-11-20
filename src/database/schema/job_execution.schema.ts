@@ -8,19 +8,16 @@ export class Job_Execution {
   @Prop()
   jobInstanceId: mongoose.Types.ObjectId;
 
-  @Prop()
+  @Prop({
+    default: 'standby',
+  })
   status: string;
 
   @Prop()
-  jobNumber: number;
-
-  totalRange: number;
+  jobKey: string;
 
   @Prop()
-  fromIndex: number;
-
-  @Prop()
-  toIndex: number;
+  totalDataExecuted: number;
 
   @Prop({
     default: Date.now,

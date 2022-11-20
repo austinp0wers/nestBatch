@@ -16,4 +16,8 @@ export class ItemWriter {
   public async saveBatchExecution(batchSaveDto) {
     await new this.batchLogModel(batchSaveDto).save();
   }
+
+  public async saveJobInstance() {}
+
+  public async saveSuccessJobExecution() {}
 }

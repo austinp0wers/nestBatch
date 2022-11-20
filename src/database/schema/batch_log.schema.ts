@@ -6,18 +6,22 @@ export type BatchLogDocument = Batch_Log & Document;
 @Schema()
 export class Batch_Log {
   @Prop()
-  batchType: string;
+  jobType: string;
 
-  @Prop()
+  @Prop({
+    default: 'ongoing',
+  })
   status: string;
-
-  @Prop()
-  result: number;
 
   @Prop({
     default: Date.now,
   })
   createdAt: Date;
+
+  @Prop({
+    default: null,
+  })
+  completedAt: Date;
 }
 
 export const BatchLogSchema = SchemaFactory.createForClass(Batch_Log);
