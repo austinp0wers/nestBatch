@@ -9,10 +9,9 @@ export class ItemProcessor {
     for (let i = 0; i < ordersList.length; i++) {
       totalRevenue += ordersList[i].notifiedPrice;
     }
-    let totalRevenueInWon = totalRevenue
+    const totalRevenueInWon = totalRevenue
       .toString()
       .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-    totalRevenueInWon = '₩' + totalRevenueInWon;
     return totalRevenueInWon;
   }
 }
