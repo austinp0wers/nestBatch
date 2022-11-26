@@ -1,3 +1,5 @@
+import { EndBatchLogPatchDto } from './../dto/endBatchLogPatch.dto';
+import { BatchLogSaveDto } from './../dto/batchLogSave.dto';
 import {
   BatchLogDocument,
   Batch_Log,
@@ -13,11 +15,20 @@ export class ItemWriter {
     private batchLogModel: Model<BatchLogDocument>,
   ) {}
 
-  public async saveBatchExecution(batchSaveDto) {
-    await new this.batchLogModel(batchSaveDto).save();
+  public async saveBatchExecution(batchSaveDto: BatchLogSaveDto) {
+    return await new this.batchLogModel(batchSaveDto).save();
   }
 
+  public async patchBatchExecution(endBatchLogPatchDto: EndBatchLogPatchDto) {
+    return await this.batchLogModel.findOneAndUpdate(
+      { _id: endBatchLogPatchDto.id },
+      {
+        status: endBatchLogPatchDto.status,
+        completedAt: endBatchLogPatchDto.completedAt,
+      },
+    );
+  }
   public async saveJobInstance() {}
 
-  public async saveSuccessJobExecution() {}
+  public async saveSuccessfulJobExecution() {}
 }

@@ -11,7 +11,7 @@ export class TaskService {
 
   // !! Interval time should not be set to env
   // app bound시 env가 null로 읽힌 상태에서 실행되는 것을 방지
-  @Interval(100000)
+  @Interval(5000)
   async totalRevenue() {
     let total_revenue;
     try {
