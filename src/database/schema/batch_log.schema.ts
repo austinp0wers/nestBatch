@@ -19,6 +19,11 @@ export class Batch_Log {
   createdAt: Date;
 
   @Prop({
+    required: true,
+  })
+  totalData: number;
+
+  @Prop({
     default: null,
   })
   completedAt: Date;

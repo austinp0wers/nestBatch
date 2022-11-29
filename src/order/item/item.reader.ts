@@ -22,4 +22,21 @@ export class ItemReader {
 
     return ordersList;
   }
+
+  public async getTotalOrderCount(fromDate: Date) {
+    const ordersList = await this.orderModel
+      .find(
+        { status: 'complete', completedAt: { $lte: fromDate } },
+        {
+          _id: 1,
+          riderId: 1,
+          notifiedPrice: 1,
+          additionalPrice: 1,
+          completedAt: 1,
+        },
+      )
+      .count();
+
+    return ordersList;
+  }
 }

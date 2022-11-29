@@ -15,6 +15,7 @@ export class BatchStepService {
   public async getTotalOrderRevenue() {
     const prevDate = new Date();
     const startBatchDto: BatchLogSaveDto = new BatchLogSaveDto('revenueBatch');
+    this.itemReader.getTotalOrderCount(prevDate);
     const currentBatch = await this.itemWriter.saveBatchExecution(
       startBatchDto,
     );
@@ -25,7 +26,9 @@ export class BatchStepService {
       totalRevenue = await this.itemProcessor.calculateTotalRevenue(
         ordersResult,
       );
-    } catch (err) {}
+    } catch (err) {
+      console.log('err');
+    }
     const endBatchDto: EndBatchLogPatchDto = new EndBatchLogPatchDto(
       currentBatch._id,
       'successful',
