@@ -15,27 +15,42 @@ export class BatchStepService {
   public async getTotalOrderRevenue() {
     const prevDate = new Date();
     const startBatchDto: BatchLogSaveDto = new BatchLogSaveDto('revenueBatch');
+    let totalRevenue: number;
+    let endBatchDto: EndBatchLogPatchDto;
     this.itemReader.getTotalOrderCount(prevDate);
     const currentBatch = await this.itemWriter.saveBatchExecution(
       startBatchDto,
     );
-    let totalRevenue: number;
-    const ordersResult = await this.itemReader.getOrders(prevDate);
 
     try {
+      const ordersResult = await this.itemReader.getOrders(prevDate);
+
       totalRevenue = await this.itemProcessor.calculateTotalRevenue(
         ordersResult,
       );
+
+      if (!totalRevenue || !ordersResult) {
+        endBatchDto = new EndBatchLogPatchDto(
+          currentBatch._id,
+          'fail',
+          new Date(),
+        );
+      }
     } catch (err) {
       console.log('err');
     }
-    const endBatchDto: EndBatchLogPatchDto = new EndBatchLogPatchDto(
-      currentBatch._id,
-      'successful',
-      new Date(),
-    );
+    const jobExecutionResult =
+      await this.itemWriter.saveSuccessfulJobExecution();
+
+    if (jobExecutionResult) {
+      endBatchDto = new EndBatchLogPatchDto(
+        currentBatch._id,
+        'successful',
+        new Date(),
+      );
+    }
+
     await this.itemWriter.patchBatchExecution(endBatchDto);
-    await this.itemWriter.saveSuccessfulJobExecution();
     return totalRevenue;
   }
 }

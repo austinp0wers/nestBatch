@@ -30,5 +30,7 @@ export class ItemWriter {
   }
   public async saveJobInstance() {}
 
-  public async saveSuccessfulJobExecution() {}
+  public async saveSuccessfulJobExecution() {
+    return true;
+  }
 }
